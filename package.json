@@ -1,0 +1,27 @@
+{
+  "name": "my-calendar",
+  "version": "1.0.0",
+  "description": "my-calendar API",
+  "scripts": {
+    "test": "examples/index.html",
+    "build": "babel lib -w -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocoder16/my-calendar.git"
+  },
+  "keywords": [
+    "caledndar"
+  ],
+  "author": "cocoder16",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cocoder16/my-calendar/issues"
+  },
+  "homepage": "https://github.com/cocoder16/my-calendar#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3"
+  }
+}

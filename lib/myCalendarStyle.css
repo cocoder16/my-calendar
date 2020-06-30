@@ -1,0 +1,43 @@
+@charset "utf-8";
+.my-calendar { margin: auto; width: 340px; outline: 1px solid blue; }
+.my-calendar button { margin: 4px; border: none; outline: none; }
+
+.my-calendar .control-wrap { display: table; border-spacing: 4px;
+    text-align: center; font-weight: bolder; font-size: 1.3rem;
+}
+
+.my-calendar .btn-cell { display: table-cell; outline: 1px solid red; vertical-align: middle; }
+.my-calendar .prev, .my-calendar .next { 
+    background-size: 60% 60%; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    width: 32px; height: 32px;
+    box-shadow: inset 0 0 18px #ccc;
+}
+.my-calendar .prev { background-image: url(./images/arrow_left.png); }
+.my-calendar .next { background-image: url(./images/arrow_right.png); }
+.my-calendar .prev:focus { outline: none; }
+.my-calendar .next:focus { outline: none; }
+
+.my-calendar .output { display: table-cell; vertical-align: middle; }
+.my-calendar .output.year { width: 104px; outline: 1px solid black; }
+.my-calendar .output.month { width: 80px; outline: 1px solid black; }
+
+.my-calendar table { border-collapse: collapse; margin: auto; }
+.my-calendar th, .my-calendar td { border: 1px solid black; width: 36px; height: 36px; padding: 0 5px 0 5px; }
+/* .my-calendar .tr {} */
+.my-calendar .selected { background-color: #ccc; }
+.my-calendar .today-btn { 
+    box-shadow: inset 0 0 18px #ccc; 
+    height: 28px;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+     /* IE10+ CSS styles go here */
+    .my-calendar .control-wrap { font-size: 1rem; }
+    .my-calendar .output span { line-height: 0; margin-top:-2px; }
+}
+@supports ( -ms-ime-align:auto ){
+   /* edge */
+    .my-calendar .output span { line-height: 0; margin-top:-14px; }
+}
