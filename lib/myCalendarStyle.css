@@ -1,5 +1,5 @@
 @charset "utf-8";
-.my-calendar { margin: auto; width: 340px; outline: 1px solid blue; }
+.my-calendar { margin: auto; width: 340px; outline: 1px solid blue; padding-bottom: 4px; }
 .my-calendar button { margin: 4px; border: none; outline: none; }
 
 .my-calendar .control-wrap { display: table; border-spacing: 4px;
@@ -23,21 +23,29 @@
 .my-calendar .output.year { width: 104px; outline: 1px solid black; }
 .my-calendar .output.month { width: 80px; outline: 1px solid black; }
 
-.my-calendar table { border-collapse: collapse; margin: auto; }
+.my-calendar table { border-collapse: collapse; margin: auto; font-size: 1.2rem; }
 .my-calendar th, .my-calendar td { border: 1px solid black; width: 36px; height: 36px; padding: 0 5px 0 5px; }
 /* .my-calendar .tr {} */
 .my-calendar .selected { background-color: #ccc; }
 .my-calendar .today-btn { 
-    box-shadow: inset 0 0 18px #ccc; 
-    height: 28px;
+    box-shadow: inset 0 0 18px #ccc; font-size: 0.95rem;
+    width: 50px; height: 28px; margin-bottom: 0;
 }
 
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-     /* IE10+ CSS styles go here */
-    .my-calendar .control-wrap { font-size: 1rem; }
-    .my-calendar .output span { line-height: 0; margin-top:-2px; }
+/* mini */
+.my-calendar.mini { width: 170px; }
+.my-calendar.mini .control-wrap { font-size: 0.9rem; border-spacing: 0px; }
+.my-calendar.mini .prev, .my-calendar.mini .next { 
+    width: 16px; height: 16px;
+    box-shadow: inset 0 0 9px #ccc;
 }
-@supports ( -ms-ime-align:auto ){
-   /* edge */
-    .my-calendar .output span { line-height: 0; margin-top:-14px; }
-}
+
+.my-calendar.mini .prev { background-image: url(./images/arrow_left_mini.png); }
+.my-calendar.mini .next { background-image: url(./images/arrow_right_mini.png); }
+.my-calendar.mini .output.year { width: 44px; }
+.my-calendar.mini .output.month { width: 30px; }
+
+.my-calendar.mini table { font-size: 0.8rem; }
+.my-calendar.mini th, .my-calendar.mini td { width: 18px; height: 18px; padding: 0 2px 0 2px; }
+
+.my-calendar.mini .today-btn { width: 32px; height: 18px; font-size: 0.62rem; }

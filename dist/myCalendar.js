@@ -1,6 +1,6 @@
 "use strict";
 
-// 오늘 옵션, mini 옵션, 콜백, scss, webpack,
+// 오늘 옵션o, mini 옵션o, 콜백, scss, cross browsing, webpack,
 var myCalendar = function () {
   //// 선언
   //기본 데이터
@@ -66,10 +66,21 @@ var myCalendar = function () {
   }; //달력 본체 만들기
 
 
-  var generateTemplate = function generateTemplate() {
+  var generateTemplate = function generateTemplate(isTodayBtn, size) {
     var node = document.createElement('div');
-    node.className = 'my-calendar';
-    var template = "\n            <div class='control-wrap'>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"prev year\"></button>\n                </div>\n                <div class='output year'><span></span></div>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"next year\"></button>\n                </div>\n                <div></div>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"prev month\"></button>\n                </div>\n                <div class='output month'><span></span></div>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"next month\"></button>\n                </div>\n            </div>\n            <table>\n                <thead>\n                    <tr>\n                        <th>\uC77C</th>\n                        <th>\uC6D4</th>\n                        <th>\uD654</th>\n                        <th>\uC218</th>\n                        <th>\uBAA9</th>\n                        <th>\uAE08</th>\n                        <th>\uD1A0</th>\n                    </tr>\n                </thead>\n                <tbody class='calendar-body'>\n                </tbody>\n            </table>\n            <button type=\"button\" class=\"today-btn\">\uC624\uB298</button>\n        ";
+
+    if (size == 'mini') {
+      node.className = 'my-calendar mini';
+    } else {
+      node.className = 'my-calendar';
+    }
+
+    var template = "\n            <div class='control-wrap'>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"prev year\"></button>\n                </div>\n                <div class='output year'><span></span></div>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"next year\"></button>\n                </div>\n                <div></div>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"prev month\"></button>\n                </div>\n                <div class='output month'><span></span></div>\n                <div class='btn-cell'>\n                    <button type=\"button\" class=\"next month\"></button>\n                </div>\n            </div>\n            <table>\n                <thead>\n                    <tr>\n                        <th>\uC77C</th>\n                        <th>\uC6D4</th>\n                        <th>\uD654</th>\n                        <th>\uC218</th>\n                        <th>\uBAA9</th>\n                        <th>\uAE08</th>\n                        <th>\uD1A0</th>\n                    </tr>\n                </thead>\n                <tbody class='calendar-body'>\n                </tbody>\n            </table>\n        ";
+
+    if (isTodayBtn) {
+      template += "<button type=\"button\" class=\"today-btn\">\uC624\uB298</button>";
+    }
+
     node.innerHTML = template;
     return node;
   }; //달력 만들기 함수
@@ -78,7 +89,7 @@ var myCalendar = function () {
   var createBone = function createBone(calendar) {
     var parent = calendar.parent;
     var tdArr = calendar.tdArr;
-    var template = generateTemplate();
+    var template = generateTemplate(calendar.isTodayBtn, calendar.size);
     parent.appendChild(template);
     var calbody = parent.querySelector(".my-calendar .calendar-body"); //버튼 이벤트
 
@@ -94,9 +105,13 @@ var myCalendar = function () {
     parent.querySelector('.next.month').addEventListener('click', function () {
       nextMonth(calendar);
     });
-    parent.querySelector('.today-btn').addEventListener('click', function () {
-      goToday(calendar);
-    }); //달력 테이블 만들기
+
+    if (calendar.isTodayBtn) {
+      parent.querySelector('.today-btn').addEventListener('click', function () {
+        goToday(calendar);
+      });
+    } //달력 테이블 만들기
+
 
     for (var i = 0; i < 6; i++) {
       tdArr[i] = new Array(7);
@@ -120,7 +135,8 @@ var myCalendar = function () {
     var parent = calendar.parent,
         viewDay = calendar.viewDay,
         selectedDay = calendar.selectedDay,
-        tdArr = calendar.tdArr;
+        tdArr = calendar.tdArr,
+        size = calendar.size;
     removeAllChildNode(parent);
     createBone(calendar); //컨트롤바 연월 바꾸기 viewDay의 프로퍼티값을 동적으로 바꾸는 것이고 다른 코드에 영향을 미치기 때문에 맨 위에 올림.
 
@@ -150,13 +166,22 @@ var myCalendar = function () {
         node.appendChild(textNode);
       };
 
-      updateTextNode(output_year, "".concat(viewDay.year, " \uB144"));
+      var yearText = viewDay.year;
+      var monthText;
 
       if (viewDay.month < 10) {
-        updateTextNode(output_month, "0".concat(viewDay.month, " \uC6D4"));
+        monthText = "0".concat(viewDay.month);
       } else {
-        updateTextNode(output_month, "".concat(viewDay.month, " \uC6D4"));
+        monthText = viewDay.month;
       }
+
+      if (size == 'big') {
+        yearText += ' 년';
+        monthText += ' 월';
+      }
+
+      updateTextNode(output_year, yearText);
+      updateTextNode(output_month, monthText);
     })(); //선택되어있는 날짜 받아와서 윤년인지 계산
 
 
@@ -220,7 +245,7 @@ var myCalendar = function () {
     }
   };
 
-  var create = function create(parent) {
+  var run = function run(parent, isTodayBtn, size) {
     // 달력생성
     var calendar = {
       parent: parent,
@@ -229,7 +254,11 @@ var myCalendar = function () {
       //달력에 보여지는 날짜
       selectedDay: {},
       //사용자가 클릭한 날짜
-      tdArr: [] //달력테이블셀
+      tdArr: [],
+      //달력테이블셀
+      isTodayBtn: isTodayBtn,
+      //오늘버튼 생성여부
+      size: size //달력사이즈
 
     }; //뷰 날짜 초기화
 
@@ -239,11 +268,22 @@ var myCalendar = function () {
     return calendar; //변수에 할당해서 calendar 겍체에 접근할 수 있게 해줌.
   };
 
+  var create = function create(parent) {
+    var isTodayBtn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return run(parent, isTodayBtn, 'big');
+  };
+
+  var createMini = function createMini(parent) {
+    var isTodayBtn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return run(parent, isTodayBtn, 'mini');
+  };
+
   var recreate = function recreate(calendar) {
     creater(calendar);
   };
 
   return {
-    create: create
+    create: create,
+    createMini: createMini
   };
 }();
