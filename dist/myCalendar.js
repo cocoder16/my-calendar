@@ -1,6 +1,6 @@
 "use strict";
 
-// 오늘 옵션o, mini 옵션o, 콜백o, css, cross browsing, webpack,
+// 오늘 옵션o, mini 옵션o, 콜백o, cssㅇ, cross browsingㅇ, webpack,
 // 콜백 - 달력선택직후o
 var myCalendar = function () {
   //// 선언
@@ -42,7 +42,7 @@ var myCalendar = function () {
         viewDay = calendar.viewDay;
     selectedDay.year = viewDay.year;
     selectedDay.month = viewDay.month;
-    selectedDay.date = tar.textContent;
+    selectedDay.date = tar.textContent * 1;
     var selected = calendar.parent.querySelector('.selected');
 
     if (selected) {
@@ -233,6 +233,7 @@ var myCalendar = function () {
           tdArr[i][j].textContent = dateCount;
           tdArr[i][j].setAttribute('class', "date_".concat(dateCount));
           tdArr[i][j].addEventListener('click', handleClickCell);
+          tdArr[i][j].style.cursor = 'pointer';
 
           if (dateCount === selectedDay.date && viewDay.month === selectedDay.month && viewDay.year === selectedDay.year) {
             tdArr[i][j].classList.add('selected');
