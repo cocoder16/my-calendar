@@ -2,7 +2,7 @@
 
 This is not a module but just a source code which store the idea to make a calendar module later.
 
-# how to use
+## How to use
 
 Copy lib or source code and paste it into proper space on your project.
 Only two methods exists. 
@@ -32,3 +32,6 @@ When you create a calendar with ```create()``` or ```createMini()```, you can as
 The ```selectedDay``` has ```year, month and date``` value which user has chosen.
 And The ```viewDay``` has ```year, month``` value which are shown on the window.
 
+## Image sample
+
+![calendar](https://user-images.githubusercontent.com/60813614/86134988-35432b80-bb25-11ea-9237-3b5e57434744.PNG)
