@@ -1,6 +1,7 @@
 "use strict";
 
-// 오늘 옵션o, mini 옵션o, 콜백, scss, cross browsing, webpack,
+// 오늘 옵션o, mini 옵션o, 콜백o, css, cross browsing, webpack,
+// 콜백 - 달력선택직후o
 var myCalendar = function () {
   //// 선언
   //기본 데이터
@@ -245,7 +246,7 @@ var myCalendar = function () {
     }
   };
 
-  var run = function run(parent, isTodayBtn, size) {
+  var run = function run(parent, isTodayBtn, size, callback) {
     // 달력생성
     var calendar = {
       parent: parent,
@@ -265,17 +266,22 @@ var myCalendar = function () {
     initialize(calendar.viewDay);
     initialize(calendar.selectedDay);
     creater(calendar);
+    setTimeout(function () {
+      if (callback) callback();
+    }, 0);
     return calendar; //변수에 할당해서 calendar 겍체에 접근할 수 있게 해줌.
   };
 
   var create = function create(parent) {
     var isTodayBtn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return run(parent, isTodayBtn, 'big');
+    var callback = arguments.length > 2 ? arguments[2] : undefined;
+    return run(parent, isTodayBtn, 'big', callback);
   };
 
   var createMini = function createMini(parent) {
     var isTodayBtn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return run(parent, isTodayBtn, 'mini');
+    var callback = arguments.length > 2 ? arguments[2] : undefined;
+    return run(parent, isTodayBtn, 'mini', callback);
   };
 
   var recreate = function recreate(calendar) {

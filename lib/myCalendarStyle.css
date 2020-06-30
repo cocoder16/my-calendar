@@ -1,12 +1,12 @@
 @charset "utf-8";
-.my-calendar { margin: auto; width: 340px; outline: 1px solid blue; padding-bottom: 4px; }
+.my-calendar { margin: auto; width: 340px; border: 1px solid #808080; border-radius: 4px; padding-bottom: 4px; }
 .my-calendar button { margin: 4px; border: none; outline: none; }
 
 .my-calendar .control-wrap { display: table; border-spacing: 4px;
     text-align: center; font-weight: bolder; font-size: 1.3rem;
 }
 
-.my-calendar .btn-cell { display: table-cell; outline: 1px solid red; vertical-align: middle; }
+.my-calendar .btn-cell { display: table-cell; vertical-align: middle; }
 .my-calendar .prev, .my-calendar .next { 
     background-size: 60% 60%; 
     background-repeat: no-repeat; 
@@ -20,8 +20,8 @@
 .my-calendar .next:focus { outline: none; }
 
 .my-calendar .output { display: table-cell; vertical-align: middle; }
-.my-calendar .output.year { width: 104px; outline: 1px solid black; }
-.my-calendar .output.month { width: 80px; outline: 1px solid black; }
+.my-calendar .output.year { width: 104px; }
+.my-calendar .output.month { width: 80px; }
 
 .my-calendar table { border-collapse: collapse; margin: auto; font-size: 1.2rem; }
 .my-calendar th, .my-calendar td { border: 1px solid black; width: 36px; height: 36px; padding: 0 5px 0 5px; }
