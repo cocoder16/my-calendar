@@ -6,7 +6,5 @@ var big_tb = document.querySelector('#big-tb');
 myCalendar.createMini(mini);
 myCalendar.createMini(mini_tb, true);
 myCalendar.create(big);
-var ex = myCalendar.create(big_tb, true, function(){
-    console.log('asynchronous');
-});
+var ex = myCalendar.create(big_tb, true);
 console.log(ex);

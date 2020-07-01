@@ -8,8 +8,8 @@ Copy lib or source code and paste it into proper space on your project.
 Only two methods exists. 
 
 ```
-myCalendar.create(parentNode, isTodayBtn, callback);
-myCalendar.createMini(parentNode, isTodayBtn, callback);
+myCalendar.create(parentNode, isTodayBtn);
+myCalendar.createMini(parentNode, isTodayBtn);
 ```
 
 A calendar which made by ```created()``` is bigger than the other one which made by ```createMini()```.
@@ -19,7 +19,6 @@ But If you modify some CSS, the distinction is not pointless.
 |---------|----|-----------|
 |parentNode|Object|A calendar will be created under this Element Node.|
 |[isTodayBtn]|Boolean|If this value is true, a button will be created with calendar which has click event listener. so if user click this button, the calendar reset to the today date.|
-|[callback]|Function|The callback will be running after printing a calendar.|
 
 You can get the date value selected by users.
 
